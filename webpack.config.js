@@ -24,7 +24,7 @@ module.exports = {
                 loader: "babel-loader",
                 include: SRC_DIR,
                 options: {
-                    presets: ["react", "es2015"]
+                    presets: ["react", "es2015", "stage-2"]
                 },
                 exclude: /node_modules/
             },
@@ -33,7 +33,7 @@ module.exports = {
                 loader: "babel-loader",
                 include: SRC_DIR,
                 options: {
-                    presets: ["react", "es2015"]
+                    presets: ["react", "es2015", "stage-2"]
                 },
                 exclude: /node_modules/
             },

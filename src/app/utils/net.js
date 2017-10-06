@@ -5,9 +5,10 @@ import axios from "axios";
 
 export const BASE_URL = "http://retriever-league.herokuapp.com";
 
-export const resources = {
+export const Resources = {
     DOGS: "/dogs",
     CONTESTS: "/contests",
+    LEAGUES: "/leagues",
 };
 
 export const configureAxios = () => {

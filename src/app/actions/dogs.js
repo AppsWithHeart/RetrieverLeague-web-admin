@@ -4,12 +4,12 @@
 import axios from "axios";
 
 import { DogsActions } from "./actionTypes";
-import { resources } from "../utils/net";
+import { Resources } from "../utils/net";
 
 export const getDogs = () => {
 
     return dispatch => {
-        axios.get(resources.DOGS)
+        axios.get(Resources.DOGS)
             .then(response => {
                 dispatch({
                     type: DogsActions.GET_DOGS,

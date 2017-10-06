@@ -2,9 +2,9 @@
  * Created by uroszivaljevic on 10/1/17.
  */
 
-const initialState = [];
+import initialState from "../store/initialState";
 
-export default (state = initialState, action) => {
+export default (state = initialState.dogs, action) => {
 
     switch (action.type) {
         case "GET_DOGS":

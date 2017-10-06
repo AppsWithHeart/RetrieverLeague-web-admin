@@ -10,9 +10,12 @@ import thunk from "redux-thunk";
 import logger from "redux-logger";
 
 import dogsReducer from "../reducers/dogs";
+import leaguesReducer from "../reducers/leagues";
+
 
 const reducers = combineReducers({
     dogs: dogsReducer,
+    leagues: leaguesReducer,
 });
 
 const store = createStore(

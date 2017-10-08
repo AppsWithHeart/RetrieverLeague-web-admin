@@ -11,7 +11,7 @@ export const getLeagues = () => {
         axios.get(Resources.LEAGUES)
             .then(response => {
                 dispatch({
-                    type: LeaguesActions.GET_LEAGUES,
+                    type: LeaguesActions.GET_LEAGUES_SUCCESS,
                     payload: {
                         leagues: response.data
                     }

@@ -3,6 +3,12 @@
  */
 
 export default {
-    dogs: [],
-    leagues: [],
+    dogs: {
+        isLoading: false,
+        dogs: [],
+    },
+    leagues: {
+        isLoading: false,
+        leagues: []
+    },
 };

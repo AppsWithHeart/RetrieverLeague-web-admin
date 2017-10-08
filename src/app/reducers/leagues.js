@@ -6,8 +6,8 @@ import { LeaguesActions } from "../actions/actionTypes";
 
 export default (state = initialState.leagues, action) => {
     switch (action.type) {
-        case LeaguesActions.GET_LEAGUES:
-            return action.payload.leagues;
+        case LeaguesActions.GET_LEAGUES_SUCCESS:
+            return { ...state, leagues: action.payload.leagues };
         default:
             return state;
     }

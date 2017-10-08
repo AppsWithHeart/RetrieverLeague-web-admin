@@ -4,6 +4,7 @@
 import axios from "axios";
 
 export const BASE_URL = "http://retriever-league.herokuapp.com";
+// export const BASE_URL = "http://localhost:3000";
 
 export const Resources = {
     DOGS: "/dogs",
@@ -13,4 +14,4 @@ export const Resources = {
 
 export const configureAxios = () => {
     axios.defaults.baseURL = BASE_URL;
-}
+};

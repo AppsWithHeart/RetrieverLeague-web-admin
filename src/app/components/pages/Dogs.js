@@ -10,13 +10,14 @@ import {
     Col,
     Row,
     ControlLabel,
-    Button
+    Button,
+    Alert
 } from "react-bootstrap";
 import { connect } from "react-redux";
 import moment from "moment";
 import Datetime from "react-datetime";
 
-import { getDogs } from "../../actions/dogs";
+import { getDogs, addDog } from "../../actions/dogs";
 import { getLeagues } from "../../actions/leagues";
 
 class Dogs extends React.Component {
@@ -29,7 +30,7 @@ class Dogs extends React.Component {
                 breed: "",
                 dateOfBirth: "",
                 ownerName: "",
-                leagueId: -1,
+                leagueId: 1,
             }
         }
     }
@@ -40,9 +41,13 @@ class Dogs extends React.Component {
     }
 
     render() {
+
+        const { dog } = this.state;
+
         return (
             <Row>
                 <Col md={8}>
+                    {this.renderLoadingIndicator()}
                     <Table striped bordered condensed hover>
                         <thead>
                         <tr>
@@ -67,37 +72,42 @@ class Dogs extends React.Component {
                                 type="text"
                                 placeholder="Name"
                                 value={this.state.dog.name}
-                                onChange={(e) => this.setState({dog: { name: e.target.value }})}
+                                onChange={(e) => this.setState({dog: { ...dog, name: e.target.value }})}
                             />
                             <ControlLabel>Breed</ControlLabel>
                             <FormControl
                                 type="text"
                                 placeholder="Breed"
                                 value={this.state.dog.breed}
-                                onChange={(e) => this.setState({dog: { breed: e.target.value }})}
+                                onChange={(e) => this.setState({dog: { ...dog, breed: e.target.value }})}
                             />
                             <ControlLabel>Owner Name</ControlLabel>
                             <FormControl
                                 type="text"
                                 placeholder="Owner Name"
                                 value={this.state.dog.ownerName}
-                                onChange={(e) => this.setState({dog: { ownerName: e.target.value }})}
+                                onChange={(e) => this.setState({dog: { ...dog, ownerName: e.target.value }})}
                             />
                             <ControlLabel>Date of birth</ControlLabel>
                             <Datetime
-                                onChange={(m) => this.setState({dog: { dateOfBirth: m.format() }})}
+                                onChange={(m) => this.setState({dog: { ...dog, dateOfBirth: m.format() }})}
                             />
                             <ControlLabel>League</ControlLabel>
                             <FormControl
                                 componentClass="select"
                                 placeholder="select"
-                                onChange={(e) => this.setState({dog: { leagueId: e.target.value }})}
+                                onChange={(e) => this.setState({dog: { ...dog, leagueId: e.target.value }})}
                             >
                                 {this.renderLeagueSelectOptions()}
                             </FormControl>
                         </FormGroup>
                     </form>
-                    <Button bsStyle="success">Submit</Button>
+                    <Button
+                        bsStyle="success"
+                        onClick={this.onSubmit}
+                    >
+                        Submit
+                    </Button>
                 </Col>
             </Row>
         )
@@ -132,13 +142,34 @@ class Dogs extends React.Component {
         })
     }
 
+    renderLoadingIndicator = () => {
+        if (this.props.isLoadingDogs) {
+            return (
+                <Alert bsStyle="info">
+                    Loading...
+                </Alert>
+            )
+        }
+    }
+
+    onSubmit = () => {
+        this.props.addDog(this.state.dog);
+    }
+
 }
 
 const mapStateToProps = state => {
     return {
-        dogs: state.dogs,
-        leagues: state.leagues,
+        isLoadingDogs: state.dogs.isLoading,
+        dogs: state.dogs.dogs,
+        leagues: state.leagues.leagues,
     }
 };
 
-export default connect(mapStateToProps, {getDogs, getLeagues})(Dogs);
+export default connect(
+    mapStateToProps,
+    {
+        getDogs,
+        getLeagues,
+        addDog
+    })(Dogs);

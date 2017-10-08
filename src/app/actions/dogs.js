@@ -9,14 +9,34 @@ import { Resources } from "../utils/net";
 export const getDogs = () => {
 
     return dispatch => {
+        dispatch({ type: DogsActions.GET_DOGS_STARTED });
         axios.get(Resources.DOGS)
             .then(response => {
                 dispatch({
-                    type: DogsActions.GET_DOGS,
+                    type: DogsActions.GET_DOGS_SUCCESS,
                     payload: {
                         dogs: response.data
                     }
                 });
+            })
+            .catch(error => {
+                dispatch({
+                    type: DogsActions.GET_DOGS_FAILED,
+                })
             });
-    };
+    }
+};
+
+export const addDog = (dog) => {
+    return dispatch => {
+        axios.post(Resources.DOGS, dog)
+            .then(response => {
+                dispatch({
+                    type: DogsActions.ADD_DOG_SUCCESS,
+                    payload: {
+                        dog: response.data
+                    }
+                })
+            })
+    }
 };

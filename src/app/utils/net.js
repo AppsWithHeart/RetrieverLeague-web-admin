@@ -3,7 +3,7 @@
  */
 import axios from "axios";
 
-export const BASE_URL = "http://retriever-league.herokuapp.com";
+export const BASE_URL = "https://retriever-league.herokuapp.com";
 // export const BASE_URL = "http://localhost:3000";
 
 export const Resources = {

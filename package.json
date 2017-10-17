@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "dev": "webpack && webpack-dev-server",
-    "postinstall": "webpack -p",
+    "dev": "./node_modules/.bin/webpack && webpack-dev-server",
+    "postinstall": "./node_modules/.bin/webpack -p",
     "start": "node server.js"
   },
   "author": "Uros Zivaljevic",

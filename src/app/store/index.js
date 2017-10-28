@@ -11,11 +11,13 @@ import logger from "redux-logger";
 
 import dogsReducer from "../reducers/dogs";
 import leaguesReducer from "../reducers/leagues";
+import contestsReducer from "../reducers/contests";
 
 
 const reducers = combineReducers({
     dogs: dogsReducer,
     leagues: leaguesReducer,
+    contests: contestsReducer,
 });
 
 const store = createStore(

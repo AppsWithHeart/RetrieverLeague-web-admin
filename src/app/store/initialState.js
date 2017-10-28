@@ -11,4 +11,8 @@ export default {
         isLoading: false,
         leagues: []
     },
+    contests: {
+        isLoading: false,
+        contests: []
+    }
 };

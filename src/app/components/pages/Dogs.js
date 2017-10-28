@@ -90,6 +90,7 @@ class Dogs extends React.Component {
                             />
                             <ControlLabel>Date of birth</ControlLabel>
                             <Datetime
+                                inputProps={{disabled: true}}
                                 onChange={(m) => this.setState({dog: { ...dog, dateOfBirth: m.format() }})}
                             />
                             <ControlLabel>League</ControlLabel>

@@ -13,6 +13,7 @@ export default {
     },
     contests: {
         isLoading: false,
-        contests: []
+        contests: [],
+        selectedContest: null,
     }
 };

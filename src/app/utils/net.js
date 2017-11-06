@@ -10,6 +10,7 @@ export const Resources = {
     DOGS: "/dogs",
     CONTESTS: "/contests",
     LEAGUES: "/leagues",
+    TASKS: "/tasks",
 };
 
 export const configureAxios = () => {

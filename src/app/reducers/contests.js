@@ -15,6 +15,8 @@ export default (state = initialState.contests, action) => {
             return { ...state, isLoading: false };
         case ContestsActions.ADD_CONTEST_SUCCESS:
             return { ...state, contests: [action.payload.contest].concat(state.contests)};
+        case ContestsActions.GET_CONTEST_SUCCESS:
+            return { ...state, selectedContest: action.payload.contest };
         default:
             return state;
     }

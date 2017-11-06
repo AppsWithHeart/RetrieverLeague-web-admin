@@ -17,12 +17,12 @@ export const getContests = () => {
                     payload: {
                         contests: response.data
                     }
-                })
+                });
             })
             .catch(error => {
                 dispatch({
                     type: ContestsActions.GET_CONTESTS_FAILED
-                })
+                });
             });
     }
 }
@@ -37,12 +37,32 @@ export const addContest = (contest) => {
                     payload: {
                         contest: response.data
                     }
-                })
+                });
             })
             .catch(error => {
                 dispatch({
                     type: ContestsActions.ADD_CONTEST_FAILED
+                });
+            });
+    }
+}
+
+export const getContest = (contestId) => {
+    return dispatch => {
+        dispatch({ type: ContestsActions.GET_CONTEST_STARTED });
+        axios.get(`${Resources.CONTESTS}${Resources.TASKS}/${contestId}`)
+            .then(response => {
+                dispatch({
+                    type: ContestsActions.GET_CONTEST_SUCCESS,
+                    payload: {
+                        contest: response.data
+                    }
                 })
             })
+            .catch(error => {
+                dispatch({
+                    type: ContestsActions.GET_CONTEST_FAILED
+                });
+            });
     }
 }

@@ -9,6 +9,7 @@ import { Grid } from "react-bootstrap";
 import Home from "../pages/Home";
 import Contests from "../pages/Contests";
 import Dogs from "../pages/Dogs";
+import ContestDetails from "../pages/ContestDetails";
 
 export default class Main extends React.Component {
 
@@ -18,7 +19,8 @@ export default class Main extends React.Component {
                 <Switch>
                     <Route exact path="/" component={Home}/>
                     <Route path="/dogs" component={Dogs}/>
-                    <Route path="/contests" component={Contests}/>
+                    <Route exact path="/contests" component={Contests}/>
+                    <Route path="/contests/:id" component={ContestDetails}/>
                 </Switch>
             </Grid>
         )

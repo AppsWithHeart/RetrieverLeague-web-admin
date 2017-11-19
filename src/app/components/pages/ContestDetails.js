@@ -42,7 +42,7 @@ class ContestDetails extends React.Component {
     renderTasks() {
         return this.props.contest.tasks.map(task => {
             return (
-                <tr>
+                <tr key={task.id}>
                     <td>{task.name}</td>
                     <td>{task.maximumScore}</td>
                 </tr>

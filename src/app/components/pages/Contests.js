@@ -50,7 +50,7 @@ class Contests extends React.Component {
 
         return (
             <Row>
-                <Col md={8}>
+                <Col md={6}>
                     {this.renderLoadingIndicator()}
                     <Table striped bordered condensed hover>
                         <thead>
@@ -65,7 +65,7 @@ class Contests extends React.Component {
                         </tbody>
                     </Table>
                 </Col>
-                <Col md={4}>
+                <Col md={6}>
                     <h3>Add a contest</h3>
                     <form>
                         <FormGroup

@@ -10,6 +10,7 @@ import Home from "../pages/Home";
 import Contests from "../pages/Contests";
 import Dogs from "../pages/Dogs";
 import ContestDetails from "../pages/ContestDetails";
+import Scores from "../pages/Scores";
 
 export default class Main extends React.Component {
 
@@ -21,6 +22,7 @@ export default class Main extends React.Component {
                     <Route path="/dogs" component={Dogs}/>
                     <Route exact path="/contests" component={Contests}/>
                     <Route path="/contests/:id" component={ContestDetails}/>
+                    <Route exact path="/scores" component={Scores}/>
                 </Switch>
             </Grid>
         )

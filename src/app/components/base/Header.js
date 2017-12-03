@@ -24,6 +24,9 @@ export default class Header extends React.Component {
                     <LinkContainer to="/contests">
                         <NavItem>Contests</NavItem>
                     </LinkContainer>
+                    <LinkContainer to="/scores">
+                        <NavItem>Scores</NavItem>
+                    </LinkContainer>
                 </Nav>
             </Navbar>
         )

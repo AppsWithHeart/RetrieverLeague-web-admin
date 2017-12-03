@@ -15,5 +15,9 @@ export default {
         isLoading: false,
         contests: [],
         selectedContest: null,
+    },
+    tasks: {
+        isLoading: false,
+        tasks: [],
     }
 };

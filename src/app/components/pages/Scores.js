@@ -48,6 +48,7 @@ class Scores extends React.Component {
                                 placeholder="select"
                                 onChange={(e) => this.setState({ selectedDogId: e.target.value })}
                             >
+                                <option disabled selected value> -- select an option -- </option>
                                 {this.renderDogSelectOptions()}
                             </FormControl>
                         </Col>
@@ -58,6 +59,7 @@ class Scores extends React.Component {
                                 placeholder="select"
                                 onChange={(e) => this.setState({ selectedContestId: e.target.value })}
                             >
+                                <option disabled selected value> -- select an option -- </option>
                                 {this.renderContestSelectOptions()}
                             </FormControl>
                         </Col>

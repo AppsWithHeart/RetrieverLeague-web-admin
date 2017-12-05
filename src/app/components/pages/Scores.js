@@ -4,6 +4,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import {
+    Alert,
     Col,
     FormControl,
     Row,
@@ -15,7 +16,7 @@ import {
 
 import { getDogs } from "../../actions/dogs";
 import { getContests } from "../../actions/contests";
-import { getTasks } from "../../actions/tasks";
+import { getTasks, postDogTasks } from "../../actions/tasks";
 
 class Scores extends React.Component {
 
@@ -24,6 +25,7 @@ class Scores extends React.Component {
         this.state = {
             selectedDogId: null,
             selectedContestId: null,
+            tasks: {},
         };
     }
 
@@ -35,6 +37,7 @@ class Scores extends React.Component {
     render() {
         return (
             <Row>
+                {this.renderLoadingIndicator()}
                 <form>
                     <FormGroup
                     >
@@ -43,6 +46,7 @@ class Scores extends React.Component {
                             <FormControl
                                 componentClass="select"
                                 placeholder="select"
+                                onChange={(e) => this.setState({ selectedDogId: e.target.value })}
                             >
                                 {this.renderDogSelectOptions()}
                             </FormControl>
@@ -73,7 +77,7 @@ class Scores extends React.Component {
                         <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Maximum Score</th>
+                            <th>Score</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -81,8 +85,25 @@ class Scores extends React.Component {
                         </tbody>
                     </Table>
                 </Col>
+                <Button
+                    bsSize="large"
+                    bsStyle="success"
+                    onClick={this.onSubmit}
+                >
+                    Submit
+                </Button>
             </Row>
         );
+    }
+
+    renderLoadingIndicator = () => {
+        if (this.props.isLoading) {
+            return (
+                <Alert bsStyle="info">
+                    Loading...
+                </Alert>
+            )
+        }
     }
 
     renderDogSelectOptions = () => {
@@ -123,7 +144,15 @@ class Scores extends React.Component {
                 return (
                     <tr key={task.id}>
                         <td>{task.name}</td>
-                        <td>{task.maximumScore}</td>
+                        <td>
+                            <input
+                                type="number"
+                                min="0"
+                                max={task.maximumScore.toString()}
+                                onChange={(e) => this.setState({tasks: { ...this.state.tasks, [task.id]: e.target.value }})}
+                            />
+                            <span>/{task.maximumScore}</span>
+                            </td>
                     </tr>
                 );
             });
@@ -132,7 +161,26 @@ class Scores extends React.Component {
     }
 
     onSetDogAndContest = () => {
+        this.setState({
+            tasks: {},
+        });
         this.props.getTasks(this.state.selectedContestId);
+    }
+
+    onSubmit = () => {
+        const { tasks, selectedDogId, selectedContestId } = this.state;
+        const dogTasks = Object.keys(tasks).map(taskKey => {
+           return {
+               taskId: taskKey,
+               score: tasks[taskKey],
+               dogId: selectedDogId,
+           };
+        });
+        const result = dogTasks.reduce((prevScore, dogTask) => {
+            return prevScore + parseInt(dogTask.score);
+        }, 0);
+        console.log(result);
+        this.props.postDogTasks(dogTasks, selectedContestId, selectedDogId, result);
     }
 
 }
@@ -142,10 +190,11 @@ const mapStateToProps = state => {
         dogs: state.dogs.dogs,
         contests: state.contests.contests,
         tasks: state.tasks.tasks,
+        isLoading: state.dogs.isLoading || state.contests.isLoading || state.tasks.isLoading,
     }
 }
 
 export default connect(
     mapStateToProps,
-    { getDogs, getContests, getTasks }
+    { getDogs, getContests, getTasks, postDogTasks }
 )(Scores);

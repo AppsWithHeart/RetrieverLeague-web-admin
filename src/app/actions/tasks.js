@@ -28,3 +28,29 @@ export const getTasks = (contestId) => {
             })
     }
 }
+
+export const postDogTasks = (dogTasks, contestId, dogId, result) => {
+    return dispatch => {
+        const params = {
+            tasks: dogTasks,
+            contestId,
+            result,
+            dogId,
+        };
+        console.log(params);
+        dispatch({
+            type: TasksActions.POST_DOG_TASKS_STARTED,
+        });
+        axios.post(Resources.DOG_TASKS, params)
+            .then(response => {
+                dispatch({
+                    type: TasksActions.POST_DOG_TASKS_SUCCESS,
+                });
+            })
+            .catch(error => {
+                dispatch({
+                    type: TasksActions.POST_DOG_TASKS_FAILED,
+                });
+            });
+    }
+}

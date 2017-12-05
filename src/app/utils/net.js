@@ -11,6 +11,7 @@ export const Resources = {
     CONTESTS: "/contests",
     LEAGUES: "/leagues",
     TASKS: "/tasks",
+    DOG_TASKS: "/tasks/dog",
 };
 
 export const configureAxios = () => {

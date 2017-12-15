@@ -151,7 +151,14 @@ class Scores extends React.Component {
                                 type="number"
                                 min="0"
                                 max={task.maximumScore.toString()}
-                                onChange={(e) => this.setState({tasks: { ...this.state.tasks, [task.id]: e.target.value }})}
+                                onChange={(e) => this.setState({
+                                    tasks: {
+                                        ...this.state.tasks,
+                                        [task.id]: {
+                                            score: e.target.value,
+                                            maximumScore: task.maximumScore,
+                                        }
+                                }})}
                             />
                             <span>/{task.maximumScore}</span>
                             </td>
@@ -174,15 +181,18 @@ class Scores extends React.Component {
         const dogTasks = Object.keys(tasks).map(taskKey => {
            return {
                taskId: taskKey,
-               score: tasks[taskKey],
+               score: tasks[taskKey].score,
+               maximumScore: tasks[taskKey].maximumScore,
                dogId: selectedDogId,
            };
         });
         const result = dogTasks.reduce((prevScore, dogTask) => {
-            return prevScore + parseInt(dogTask.score);
+            const score = parseFloat(dogTask.score) / parseFloat(dogTask.maximumScore);
+            return prevScore + score;
         }, 0);
-        console.log(result);
-        this.props.postDogTasks(dogTasks, selectedContestId, selectedDogId, result);
+        const averageResult = result / dogTasks.length * 100;
+        console.log(averageResult);
+        this.props.postDogTasks(dogTasks, selectedContestId, selectedDogId, averageResult);
     }
 
 }

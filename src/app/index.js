@@ -4,6 +4,7 @@ import ReactDOM from "react-dom";
 
 import App from "./components/App";
 import 'bootstrap/dist/css/bootstrap.css';
+require("babel-polyfill");
 
 import { configureAxios } from "./utils/net";
 

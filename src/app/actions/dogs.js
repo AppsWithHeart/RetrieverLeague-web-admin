@@ -29,14 +29,23 @@ export const getDogs = () => {
 
 export const addDog = (dog) => {
     return dispatch => {
-        axios.post(Resources.DOGS, dog)
-            .then(response => {
-                dispatch({
-                    type: DogsActions.ADD_DOG_SUCCESS,
-                    payload: {
-                        dog: response.data
-                    }
+        return new Promise((resolve, reject) => {
+            axios.post(Resources.DOGS, dog)
+                .then(response => {
+                    dispatch({
+                        type: DogsActions.ADD_DOG_SUCCESS,
+                        payload: {
+                            dog: response.data
+                        }
+                    });
+                    resolve();
                 })
-            })
+                .catch(error => {
+                    dispatch({
+                        type: DogsActions.ADD_DOG_FAILED,
+                    });
+                    reject();
+                })
+        });
     }
 };

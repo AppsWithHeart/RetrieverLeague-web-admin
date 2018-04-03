@@ -30,7 +30,7 @@ class Dogs extends React.Component {
                 breed: "",
                 dateOfBirth: "",
                 ownerName: "",
-                leagueId: 1,
+                leagueId: 0,
             }
         }
     }
@@ -97,8 +97,10 @@ class Dogs extends React.Component {
                             <FormControl
                                 componentClass="select"
                                 placeholder="select"
+                                value={this.state.dog.leagueId}
                                 onChange={(e) => this.setState({dog: { ...dog, leagueId: e.target.value }})}
                             >
+                                <option key={0} value={0}>Select a league</option>
                                 {this.renderLeagueSelectOptions()}
                             </FormControl>
                         </FormGroup>
@@ -153,8 +155,16 @@ class Dogs extends React.Component {
         }
     }
 
-    onSubmit = () => {
-        this.props.addDog(this.state.dog);
+    onSubmit = async () => {
+        if (this.state.dog.leagueId !== 0) {
+            try {
+                await this.props.addDog(this.state.dog);
+            } catch (error) {
+                alert("Unable to add dog.")
+            }
+        } else {
+            alert("Please select league.");
+        }
     }
 
 }
